@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int reverse(int x) {
+        long y=x, newnum=0;
+        int flag=0;
+        if(y<0)
+        {
+            flag=1;
+            y*=-1;
+        }
+        while(y)
+        {
+            newnum=newnum*10+(y%10);
+            y/=10;
+        }
+        if(flag==1)
+        {
+            newnum*=-1;
+        }
+        if(newnum<-1*pow(2,31) || newnum>pow(2,31)-1)
+            return 0;
+        else
+            return newnum;
+    }
+};
