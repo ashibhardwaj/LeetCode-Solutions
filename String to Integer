@@ -1,0 +1,10 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+        int x=0;
+        stringstream s(str);
+        s>>x;
+        return x;
+        
+    }
+};
