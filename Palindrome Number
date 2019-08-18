@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        int flag=0;
+        string s=to_string(x);
+        string r=s;
+        reverse(s.begin(),s.end());
+        for(int i=0; i<s.length();i++)
+        {
+            if(s[i]!=r[i])
+                flag++;
+        }
+        if(flag==0)
+            return true;
+        return false;
+    }
+};
