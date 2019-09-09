@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int ls(vector<int> &arr, int target, int l, int r)
+    {
+        while(l<=r)
+        {
+            int mid=(l+r)/2;
+            if((mid==0 && arr[mid]==target) ||(arr[mid]==target && arr[mid-1]<target))
+            {
+                return mid;
+            }
+            else if(arr[mid]<target)
+                return ls(arr, target, mid+1, r);
+            else
+                return ls(arr, target, l, mid-1);
+        }
+        return -1;
+    }
+    int rs(vector<int> &arr, int target, int l, int r)
+    {
+        while(l<=r)
+        {
+            int mid=(l+r)/2;
+            if((mid==arr.size()-1 && arr[mid]==target) ||(arr[mid]==target && arr[mid+1]>target))
+            {
+                return mid;
+            }
+            else if(arr[mid]>target)
+                return rs(arr, target, l, mid-1);
+            else
+                return rs(arr, target, mid+1, r);
+        }
+        return -1;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int n=nums.size();
+        vector<int> ans;
+        ans.push_back(ls(nums, target, 0, n-1));
+        ans.push_back(rs(nums, target, 0, n-1));
+        return ans;
+    }
+};
