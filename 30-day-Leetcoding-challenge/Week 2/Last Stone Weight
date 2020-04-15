@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        int n=stones.size();
+        if(n==0)
+            return 0;
+        map<int, int, greater<int>>m;
+        for(int i=0; i<n; i++)
+        {
+            m[stones[i]]++;
+        }
+        while(1)
+        {
+            if(m.size()==1)
+            {
+                if(m.begin()->second%2==0)
+                    return 0;
+                else
+                    return m.begin()->first;
+            }
+            else
+            {
+                auto it=m.begin();
+                if(it->second%2==0)
+                    m.erase(it);
+                else
+                {
+                    it++;
+                    m[m.begin()->first-it->first]++;
+                    it->second--;
+                    if(it->second==0)
+                        m.erase(it);
+                    m.erase(m.begin());
+                }
+            }
+        }
+        return stones[0];
+    }
+};
