@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string leftshift(string s, int x)
+    {
+        int n=s.length();
+        if(n==1 || x%n==0)
+            return s;
+        if(x>3)
+            x=x%n;
+        string t=s;
+        for(int i=0; i<n; i++)
+        {
+            s[(i+n-x)%n]=t[i];
+        }
+        return s;
+    }
+    string rightshift(string s, int x)
+    {
+        int n=s.length();
+        if(n==1)
+            return s;
+        string t=s;
+        for(int i=0; i<n; i++)
+        {
+            s[(i+x)%n]=t[i];
+        }
+        return s;
+    }
+    string stringShift(string s, vector<vector<int>>& shift) {
+        int n=shift.size();
+        int x=0;
+        for(int i=0; i<n; i++)
+        {
+            if(shift[i][0]==0)
+                x-=shift[i][1];
+            else
+                x+=shift[i][1];
+        }
+        if(x==0)
+            return s;
+        if(x<0)
+        {
+            return leftshift(s, -x);
+        }
+        else
+        {
+            return rightshift(s, x);
+        }
+    }
+};
