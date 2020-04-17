@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int high=0, low=0;
+        for(char a:s)
+        {
+            if(a=='(')
+            {
+                high++;
+                low++;
+            }
+            else if(a==')')
+            {
+                high--;
+                low--;
+            }
+            else
+            {
+                high++;
+                low--;
+            }
+            if(high<0)
+                return 0;
+            low=max(low, 0);
+        }
+        return low==0;
+    }
+};
