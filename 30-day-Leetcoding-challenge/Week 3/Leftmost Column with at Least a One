@@ -1,0 +1,27 @@
+/**
+ * // This is the BinaryMatrix's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class BinaryMatrix {
+ *   public:
+ *     int get(int x, int y);
+ *     vector<int> dimensions();
+ * };
+ */
+
+class Solution {
+public:
+    int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
+        vector <int> d = binaryMatrix.dimensions();
+        int l = 0, r = d[1]-1;
+        while(l<d[0] && r>=0)
+        {
+            if(binaryMatrix.get(l, r)==1)
+                r--;
+            else
+                l++;
+        }
+        if(r==d[1]-1)
+            return -1;
+        return r+1;
+    }
+};
