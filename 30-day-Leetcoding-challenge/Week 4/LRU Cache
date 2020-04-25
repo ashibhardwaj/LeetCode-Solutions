@@ -1,0 +1,48 @@
+class LRUCache {
+    unordered_map < int, int> m;
+    int n;
+    deque <int> q;
+public:
+    LRUCache(int capacity) {
+        n=capacity;
+    }
+    
+    int get(int key) {
+        if(m.find(key)!=m.end())
+        {
+            q.erase(find(q.begin(), q.end(), key));
+            q.push_back(key);
+            return m[key];
+        }
+        else 
+            return -1;
+    }
+    
+    void put(int key, int value) {
+        if(m.find(key)==m.end() && m.size()<n)
+        {
+            m[key]=value;
+            q.push_back(key);
+        }
+        else if(m.find(key)!=m.end())
+        {
+            q.erase(find(q.begin(), q.end(), key));
+            q.push_back(key);
+            m[key]=value;
+        }
+        else if(m.size()==n)
+        {
+            m.erase(q.front());
+            q.pop_front();
+            m[key]=value;
+            q.push_back(key);
+        }
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
