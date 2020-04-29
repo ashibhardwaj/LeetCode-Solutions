@@ -1,0 +1,29 @@
+class FirstUnique {
+    vector <long long> q;
+    unordered_map<long long, long long> m;
+    long long k=0;
+public:
+    FirstUnique(vector<int>& nums) {
+        int n=nums.size();
+        for(int i=0; i<n; i++)
+        {
+            if(m[nums[i]]==0)
+                q.push_back(nums[i]);
+            m[nums[i]]++;
+        }
+    }
+    
+    int showFirstUnique() {
+        while(k<m.size() && m[q[k]]>1)
+            k++;
+        if(k<m.size())
+            return q[k];
+        return -1;
+    }
+    
+    void add(int value) {
+        if(m[value]==0)
+            q.push_back(value);
+        m[value]++;
+    }
+};
