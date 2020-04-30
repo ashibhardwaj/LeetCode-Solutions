@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    stack<pair<TreeNode*, int>>s;
+public:
+    bool isValidSequence(TreeNode* root, vector<int>& arr) {
+        int n=arr.size();
+        if(root->val!=arr[0])
+            return false;
+        s.push(make_pair(root, 0));
+        while(!s.empty())
+        {
+            pair<TreeNode*, int> temp=s.top();
+            s.pop();
+            if(temp.second==n-1)
+            {
+                if(!temp.first->left && !temp.first->right)
+                    return true;
+            }
+            if(temp.first->left && temp.second+1<n && temp.first->left->val==arr[temp.second+1])
+                s.push(make_pair(temp.first->left, temp.second+1));
+            if(temp.first->right && temp.second+1<n && temp.first->right->val==arr[temp.second+1])
+                s.push(make_pair(temp.first->right, temp.second+1));
+        }
+        return false;
+    }
+};
