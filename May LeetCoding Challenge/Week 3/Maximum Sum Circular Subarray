@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& arr) {
+        int ans_min = INT_MAX;
+        int ans_max = INT_MIN;
+        int a_min = 0;
+        int a_max = 0;
+        int a = 0;
+        for(auto x : arr)
+        {
+            a_max = max(x, a_max + x);
+            ans_max = max(ans_max, a_max);
+            a_min = min(x, a_min + x);
+            ans_min = min(ans_min, a_min);
+            a += x;
+        }
+        return ans_max > 0 ? max(ans_max, a - ans_min) : ans_max;
+    }
+};
