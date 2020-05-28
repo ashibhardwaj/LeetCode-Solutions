@@ -1,0 +1,40 @@
+class Solution {
+    unordered_map <int, vector <int>> m;
+    vector <int> vis;
+public:
+    bool dfs(int a)
+    {
+        for(auto i : m[a])
+        {
+            if(vis[i] == -1)
+            {
+                vis[i] = !vis[a];
+                if(dfs(i) == false)
+                    return false;
+            }
+            if(vis[a] == vis[i])
+                return false;
+        }
+        return true;
+    }
+    
+    bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
+        int n = dislikes.size();
+        vis.resize(N+1, -1);
+        for(int i = 0; i < n; i++)
+        {
+            m[dislikes[i][0]].push_back(dislikes[i][1]);
+            m[dislikes[i][1]].push_back(dislikes[i][0]);
+        }
+        for(auto it = m.begin(); it != m.end(); it++)
+        {
+            if(vis[it->first] == -1)
+            {
+                vis[it->first] == 1;
+                if(dfs(it->first) == false)
+                    return false;
+            }   
+        }
+        return true;
+    }
+};
