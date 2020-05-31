@@ -1,0 +1,14 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+        vector <pair <long, vector <int>>> ans;
+        for(auto x : points)
+            ans.push_back({pow(x[0],2) + pow(x[1],2),x});
+        sort(ans.begin(), ans.end());
+        ans.resize(K);
+        vector <vector <int>> a;
+        for(auto x : ans)
+            a.push_back(x.second);
+        return a;
+    }
+};
